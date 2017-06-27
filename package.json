@@ -1,0 +1,14 @@
+{
+  "name": "wikipedia-translation-api",
+  "version": "0.0.1",
+  "description": "Wikipedia data backed translation API",
+  "author": "Nobu Funaki <nobu.funaki@gmail.com>",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "dependencies": {
+    "express": "^4.15",
+    "mysql": "^2.13.0"
+  }
+}
