@@ -73,7 +73,7 @@ Depending on your Docker environment, the endpoint might differ. If you are usin
   "ar": "رامن",
   "az": "Ramen",
   "be": "Рамэн",
-  "be-x-old": "Рамэн"
+  "be-x-old": "Рамэн",
   "zh": "日本拉面",
   "zh-yue": "拉麪 (日本)"
 }
