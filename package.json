@@ -1,7 +1,7 @@
 {
-  "name": "wikipedia-translation-api",
+  "name": "langlinks-server",
   "version": "0.0.1",
-  "description": "Wikipedia data backed translation API",
+  "description": "langlinks-server can be used to look up a given term in different languages based on Wikipedia's langlinks data.",
   "author": "Nobu Funaki <nobu.funaki@gmail.com>",
   "main": "server.js",
   "scripts": {
@@ -10,5 +10,13 @@
   "dependencies": {
     "express": "^4.15",
     "mysql": "^2.13.0"
+  },
+  "devDependencies": {
+    "eslint": "^4.1.1",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.6.0",
+    "eslint-plugin-node": "^5.1.0",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1"
   }
 }

@@ -1,20 +1,21 @@
-const express = require('express');
-const mysql = require('mysql');
-const pool  = mysql.createPool({
-  host     : 'db',
-  user     : 'wiki',
-  password : 'wiki',
-  database : 'wikipedia'
-});
+const express = require('express')
+const mysql = require('mysql')
+const pool = mysql.createPool({
+  host: 'db',
+  user: process.env.MYSQL_USER,
+  password: process.env.MYSQL_PASSWORD,
+  database: process.env.MYSQL_DATABASE
+})
 
-const app = express();
+const app = express()
 
 app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
+  res.send('Go search on /search/:term')
+})
 
 app.get('/search/:term', (req, res) => {
   pool.getConnection((err, connection) => {
+    if (err) throw new Error(err)
     connection.query(`
       SELECT ll_lang as lang, ll_title as title
         FROM langlinks
@@ -26,19 +27,19 @@ app.get('/search/:term', (req, res) => {
             LIMIT 1
         )
         `, [req.params.term],
-    (error, results, fields) => {
-      connection.release();
-      if (error) throw error;
-      res.json(results.map((result) => {
-        return {
-          lang: result.lang.toString(),
-          title: result.title.toString()
-        }
-      }))
-    });
-  });
-});
+      (error, results, fields) => {
+        connection.release()
+        if (error) throw error
+        const mp = results.reduce((map, r) => {
+          map[r.lang.toString()] = r.title.toString()
+          return map
+        }, {})
+        // NOTE `new Map()` seems not working with res.json()
+        res.json(mp)
+      })
+  })
+})
 
-app.listen(8080, _ => {
-  console.log('App is running!');
-});
+app.listen(process.env.PORT, _ => {
+  console.log('App is running!')
+})

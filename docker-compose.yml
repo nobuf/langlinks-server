@@ -12,13 +12,25 @@ services:
       MYSQL_USER: wiki
       MYSQL_PASSWORD: wiki
       MYSQL_ROOT_PASSWORD: wikiwiki
-  web:
+  langlinks-server:
     depends_on:
       - db
     build: .
     volumes:
       - .:/app:cached
+    networks:
+      - default
+      - langlinks
     expose:
       - 8080
     ports:
       - "8080:8080"
+    environment:
+      PORT: 8080
+      MYSQL_DATABASE: wikipedia
+      MYSQL_USER: wiki
+      MYSQL_PASSWORD: wiki
+
+networks:
+  langlinks:
+    external: true
