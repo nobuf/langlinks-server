@@ -40,6 +40,6 @@ app.get('/search/:term', (req, res) => {
   })
 })
 
-app.listen(process.env.PORT, _ => {
+app.listen(process.env.PORT, () => {
   console.log('App is running!')
 })
