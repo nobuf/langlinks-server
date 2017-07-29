@@ -38,11 +38,11 @@ This should bring up two containers. Once they are ready, download a couple of W
 
 ```shell
 curl -o ./migrations/jawiki-page.sql.gz \
-  https://dumps.wikimedia.org/jawiki/20170620/jawiki-20170620-page.sql.gz
+  https://dumps.wikimedia.org/jawiki/20170720/jawiki-20170720-page.sql.gz
 gunzip ./migrations/jawiki-page.sql.gz
 
 curl -o ./migrations/jawiki-langlinks.sql.gz \
-  https://dumps.wikimedia.org/jawiki/20170620/jawiki-20170620-langlinks.sql.gz
+  https://dumps.wikimedia.org/jawiki/20170720/jawiki-20170720-langlinks.sql.gz
 gunzip ./migrations/jawiki-langlinks.sql.gz
 ```
 
