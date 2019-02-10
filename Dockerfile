@@ -6,6 +6,7 @@ WORKDIR /app
 RUN npm install -g nodemon
 
 COPY package.json /app/
+COPY package-lock.json /app/
 RUN npm install
 
 CMD ["npm", "start"]
