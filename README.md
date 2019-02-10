@@ -1,6 +1,6 @@
 # Langlinks Server
 
-This tiny server might answer a question like "what is ラーメン in different languages?" quickly:
+This tiny server might answer a question like "How do you say ラーメン in different languages?":
 
 ```shell
 docker-compose up -d
@@ -15,7 +15,7 @@ Here we go :ramen:
 
 ## How it works and motivation
 
-It looks up a Wikipedia entry by using exact match with title, then searches linked entries in other languages. Instead of accessing external API, it uses local database. You have to download a few hundred mega bytes of Wikipedia data first.
+It looks up a Wikipedia page by using exact match with title, then searches linked pages in other languages. Instead of accessing external API, it uses local database. You have to download a few hundred mega bytes of Wikipedia data first.
 
 While it's not intended to be used as a multilingual dictionary, it might be useful for batch translation for well-known objects.
 
@@ -23,7 +23,10 @@ While it's not intended to be used as a multilingual dictionary, it might be use
 
 ```shell
 docker --version
-Docker version 17.06.0-ce, build 02c1d87
+Docker version 18.09.1, build 4c52b90
+
+docker-compose --version
+docker-compose version 1.23.2, build 1110ad01
 ```
 
 ```shell
@@ -38,11 +41,11 @@ This should bring up two containers. Once they are ready, download a couple of W
 
 ```shell
 curl -o ./migrations/jawiki-page.sql.gz \
-  https://dumps.wikimedia.org/jawiki/20170720/jawiki-20170720-page.sql.gz
+  https://dumps.wikimedia.org/jawiki/20190201/jawiki-20190201-page.sql.gz
 gunzip ./migrations/jawiki-page.sql.gz
 
 curl -o ./migrations/jawiki-langlinks.sql.gz \
-  https://dumps.wikimedia.org/jawiki/20170720/jawiki-20170720-langlinks.sql.gz
+  https://dumps.wikimedia.org/jawiki/20190201/jawiki-20190201-langlinks.sql.gz
 gunzip ./migrations/jawiki-langlinks.sql.gz
 ```
 
@@ -55,7 +58,7 @@ docker-compose exec db \
   sh -c 'mysql -uwiki -pwiki wikipedia < /migrations/jawiki-langlinks.sql'
 ```
 
-And that's it. By default, it's running on `8080` port.
+And that's it. By default, it's running on `8080` port. See docker-compose.yml.
 
 ## API Reference
 
@@ -63,7 +66,7 @@ Depending on your Docker environment, the endpoint might differ. If you are usin
 
 - `GET /search/[term]`
   - Parameters
-    - `term` (`string`) — this is the Wikipedia entry you're looking for. That means it must be formatted (ex. underscore as space)
+    - `term` (`string`) — Specify the title of a Wikipedia page. The title appears in web address. For instance, "Munakata,_Fukuoka". Not "Munakata, Fukuoka".
   - Response
     - key: language code
     - value: translated word
@@ -83,7 +86,7 @@ Depending on your Docker environment, the endpoint might differ. If you are usin
 
 ## Contributing
 
-If you have any ideas let @nobuf know by opening an issue. Pull requests are always welcome.
+If you have any ideas let @nobuf know by opening an issue. Pull requests are always welcome :)
 
 ## License
 
