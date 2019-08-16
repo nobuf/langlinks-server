@@ -23,10 +23,10 @@ While it's not intended to be used as a multilingual dictionary, it might be use
 
 ```shell
 docker --version
-Docker version 18.09.1, build 4c52b90
+Docker version 19.03.1, build 74b1e89
 
 docker-compose --version
-docker-compose version 1.23.2, build 1110ad01
+docker-compose version 1.24.1, build 4667896b
 ```
 
 ```shell
@@ -41,11 +41,11 @@ This should bring up two containers. Once they are ready, download a couple of W
 
 ```shell
 curl -o ./migrations/jawiki-page.sql.gz \
-  https://dumps.wikimedia.org/jawiki/20190201/jawiki-20190201-page.sql.gz
+  https://dumps.wikimedia.org/jawiki/latest/jawiki-latest-page.sql.gz
 gunzip ./migrations/jawiki-page.sql.gz
 
 curl -o ./migrations/jawiki-langlinks.sql.gz \
-  https://dumps.wikimedia.org/jawiki/20190201/jawiki-20190201-langlinks.sql.gz
+  https://dumps.wikimedia.org/jawiki/latest/jawiki-latest-langlinks.sql.gz
 gunzip ./migrations/jawiki-langlinks.sql.gz
 ```
 
