@@ -27,16 +27,16 @@ app.get('/search/:term', (req, res) => {
             LIMIT 1
         )
         `, [req.params.term],
-      (error, results, fields) => {
-        connection.release()
-        if (error) throw error
-        const mp = results.reduce((map, r) => {
-          map[r.lang.toString()] = r.title.toString()
-          return map
-        }, {})
-        // NOTE `new Map()` seems not working with res.json()
-        res.json(mp)
-      })
+    (error, results, fields) => {
+      connection.release()
+      if (error) throw error
+      const mp = results.reduce((map, r) => {
+        map[r.lang.toString()] = r.title.toString()
+        return map
+      }, {})
+      // NOTE `new Map()` seems not working with res.json()
+      res.json(mp)
+    })
   })
 })
 
