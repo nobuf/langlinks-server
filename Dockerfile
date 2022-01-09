@@ -3,10 +3,9 @@ FROM node:8.17-alpine
 RUN mkdir /app
 WORKDIR /app
 
-RUN npm install -g nodemon
-
 COPY package.json /app/
 COPY package-lock.json /app/
-RUN npm install
+RUN npm install -g nodemon@1.19 \
+    && npm install
 
 CMD ["npm", "start"]
