@@ -3,7 +3,7 @@
 This tiny server might answer a question like "How do you say ラーメン in different languages?":
 
 ```shell
-docker-compose up -d
+docker compose up -d
 curl "http://localhost:8080/search/%E3%83%A9%E3%83%BC%E3%83%A1%E3%83%B3"
 ```
 
@@ -23,10 +23,10 @@ While it's not intended to be used as a multilingual dictionary, it might be use
 
 ```shell
 docker --version
-Docker version 19.03.1, build 74b1e89
+Docker version 27.5.1, build 9f9e405
 
-docker-compose --version
-docker-compose version 1.24.1, build 4667896b
+docker compose version
+Docker Compose version v2.32.4
 ```
 
 ```shell
@@ -34,7 +34,7 @@ git clone https://github.com/nobuf/langlinks-server.git
 cd langlinks-server
 # Expose this server to other Docker containers
 docker network create langlinks
-docker-compose up --build -d
+docker compose up --build -d
 ```
 
 This should bring up two containers. Once they are ready, download a couple of Wikipedia dump files and import them. The below example uses jawiki, but it should work with any language as far as you have `page` and `langlinks` data set. jawiki's each file is about 120MB.
@@ -52,9 +52,9 @@ gunzip ./migrations/jawiki-langlinks.sql.gz
 Importing those data would take some time on an average laptop environment.
 
 ```shell
-docker-compose exec db \
+docker compose exec db \
   sh -c 'mysql -uwiki -pwiki wikipedia < /migrations/jawiki-page.sql'
-docker-compose exec db \
+docker compose exec db \
   sh -c 'mysql -uwiki -pwiki wikipedia < /migrations/jawiki-langlinks.sql'
 ```
 
